@@ -51,3 +51,15 @@ function generateForecastCards() {
 }
 
 window.addEventListener("load", generateForecastCards);
+
+let num1 = 0;
+let num2 = 0;
+function generateTwoNumbers() {
+  num1 = Math.floor(Math.random() * 10);
+  num2 = Math.floor(Math.random() * 10);
+  if (num1 !== num2) {
+    return num1, num2;
+  } else {
+    generateTwoNumbers();
+  }
+}
