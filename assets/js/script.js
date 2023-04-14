@@ -7,7 +7,16 @@ var day4 = ["Chest", "traps", "Lats"]
 var day5 = ["glutes", "Hamstrings", "calves"]
 
 var randomEx1 = Math.floor(Math.random() * 10);
-var randomEx2 = Math.floor(Math.random() * 10);
+var randomEx2 = 0;
+
+function generateNumber() {
+  randomEx2 = Math.floor(Math.random() * 10);
+  if (randomEx1 !== randomEx2) {
+    return randomEx2;
+  } else {
+    generateNumber();
+  }
+}
 
 for (i=0; i<3; i++) {
 fetch(`https://api.api-ninjas.com/v1/exercises?muscle=${day1[i]}`, {
@@ -19,9 +28,8 @@ fetch(`https://api.api-ninjas.com/v1/exercises?muscle=${day1[i]}`, {
     return response.json();
   }
   response.json([0]).then(function (data) {
-    if (randomEx1 !== randomEx2)
     console.log(data[randomEx1])
-    console.log(data[randomEx2])}
+     console.log(data[randomEx2])}
   );
 })};
 
