@@ -38,8 +38,11 @@ for (i = 0; i < 3; i++) {
 // Generating Weather Cards
 let pageBody = $("#page-content");
 let mainCard = $("#mainWeatherCard");
+let userSearch = $("#user-city");
 function generateForecastCards() {
-  let cityName = "Madison";
+  clearOld();
+  console.log(pageBody, mainCard);
+  let cityName = $("#user-city").val();
   const weatherUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&units=imperial&appid=acbf659b6dad995f4221a78b638e6923`;
   fetch(weatherUrl).then(function (response) {
     if (!response.ok) {
@@ -99,7 +102,7 @@ function generateForecastCards() {
           mainCard.append(mainHumidity);
         } else {
           let card = $("<div>");
-          card.addClass("container bg-blue-600 w-80 h-60 text-2xl");
+          card.addClass("container bg-blue-600 w-80 h-60 text-2xl dayCastCard");
           pageBody.append(card);
           //
           let cardBody = $("<div>");
@@ -140,4 +143,11 @@ function generateForecastCards() {
   });
 }
 
-window.addEventListener("load", generateForecastCards);
+function clearOld() {
+  document.querySelectorAll("[class*=dayCastCard]").forEach((element) => {
+    element.style.display = "none";
+  });
+  mainCard.text("");
+}
+
+window.addEventListener("search", generateForecastCards);
