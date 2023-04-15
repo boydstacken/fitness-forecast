@@ -79,6 +79,7 @@ function generateForecastCards() {
           mainCard.append(mainTitle);
           //
           let mainIcon = $("<img>");
+          mainIcon.addClass("mx-auto justify-self-center");
           mainIcon.attr(
             "src",
             `https://openweathermap.org/img/wn/${weatherIcon}@2x.png`
@@ -111,7 +112,7 @@ function generateForecastCards() {
           cardBody.append(cardTitle);
           //
           let cardIcon = $("<img>");
-          cardIcon.addClass("img-fluid");
+          cardIcon.addClass("mx-auto justify-self-center");
           cardIcon.attr(
             "src",
             `https://openweathermap.org/img/wn/${weatherIcon}@2x.png`
