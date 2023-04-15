@@ -4,7 +4,7 @@ var muscle = [["Abdominals", "lower_back", "middle_back"],["abductors", "Adducto
 var randomEx1 = Math.floor(Math.random() * 10);
 var randomEx2 = 0;
 
-var exeDay = 1;
+var exeDay = 0;
 
 function generateNumber() {
   randomEx2 = Math.floor(Math.random() * 10);
@@ -15,6 +15,18 @@ function generateNumber() {
   }
 }
 
+for (i=0; i<=4; i++){
+  if (exeDay > 4) {
+    clearInterval(exeDay)
+  } else {
+  generateWorkout()
+  exeDay++
+}
+}
+
+
+
+function generateWorkout(){
 for (i=0; i<3; i++) {
 fetch(`https://api.api-ninjas.com/v1/exercises?muscle=${muscle[exeDay][i]}`, {
   method: "GET",
@@ -28,8 +40,13 @@ fetch(`https://api.api-ninjas.com/v1/exercises?muscle=${muscle[exeDay][i]}`, {
   response.json([0]).then(function (data) {
     console.log(data[randomEx1])
      console.log(data[randomEx2])}
+     
   );
-})};
+})}
+};
+
+
+// -------------------------------------------------------------------
 
 function generateForecastCards() {
   let cityName = "Madison";
