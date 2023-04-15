@@ -24,6 +24,7 @@ fetch(`https://api.api-ninjas.com/v1/exercises?muscle=${muscle[exeDay][i]}`, {
   if (!response.ok) {
     return response.json();
   }
+
   response.json([0]).then(function (data) {
     console.log(data[randomEx1])
      console.log(data[randomEx2])}
