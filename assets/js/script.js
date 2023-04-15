@@ -36,6 +36,7 @@ for (i = 0; i < 3; i++) {
   });
 }
 // Generating Weather Cards
+let pageBody = $("#page-content");
 let mainCard = $("#mainWeatherCard");
 function generateForecastCards() {
   let cityName = "Madison";
@@ -95,6 +96,43 @@ function generateForecastCards() {
           let mainHumidity = $("<p>");
           mainHumidity.text(`${humidity}`);
           mainCard.append(mainHumidity);
+        } else {
+          let card = $("<div>");
+          card.addClass("container bg-blue-600 w-80 h-60 text-2xl");
+          pageBody.append(card);
+          //
+          let cardBody = $("<div>");
+          cardBody.addClass("card-body");
+          card.append(cardBody);
+          //
+          let cardTitle = $("<h3>");
+          cardTitle.addClass("card-title");
+          cardTitle.text(date);
+          cardBody.append(cardTitle);
+          //
+          let cardIcon = $("<img>");
+          cardIcon.addClass("img-fluid");
+          cardIcon.attr(
+            "src",
+            `https://openweathermap.org/img/wn/${weatherIcon}@2x.png`
+          );
+          cardBody.append(cardIcon);
+          //
+          let cardTemp = $("<p>");
+          cardTemp.addClass("card-text");
+          cardTemp.text(temp);
+          cardBody.append(cardTemp);
+          //
+          let cardWind = $("<p>");
+          cardWind.addClass("card-text");
+          cardWind.text(wind);
+          cardBody.append(cardWind);
+          //
+          let cardHumidity = $("<p>");
+          cardHumidity.addClass("card-text");
+          cardHumidity.text(humidity);
+          cardBody.append(cardHumidity);
+          //
         }
       }
     });
