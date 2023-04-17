@@ -20,42 +20,43 @@ function generateNumber() {
   }
 }
 
-for (i=0; i<=4; i++){
+for (i = 0; i <= 4; i++) {
   if (exeDay > 4) {
-    clearInterval(exeDay)
+    clearInterval(exeDay);
   } else {
-  generateWorkout()
-  exeDay++
-}
-}
-
-
-
-function generateWorkout(){
-for (i=0; i<3; i++) {
-fetch(`https://api.api-ninjas.com/v1/exercises?muscle=${muscle[exeDay][i]}`, {
-  method: "GET",
-  headers: { "X-Api-Key": "JTo+3b4INS07H1+MuR5ygw==xgXVzkHdaEOHWO1Y" },
-  contentType: "application/json",
-}).then(function (response) {
-  if (!response.ok) {
-    return response.json();
+    generateWorkout();
+    exeDay++;
   }
+}
 
-  response.json([0]).then(function (data) {
-    console.log(data[randomEx1])
-     console.log(data[randomEx2])}
-     
-  );
-})}
-};
+function generateWorkout() {
+  for (i = 0; i < 3; i++) {
+    fetch(
+      `https://api.api-ninjas.com/v1/exercises?muscle=${muscle[exeDay][i]}`,
+      {
+        method: "GET",
+        headers: { "X-Api-Key": "JTo+3b4INS07H1+MuR5ygw==xgXVzkHdaEOHWO1Y" },
+        contentType: "application/json",
+      }
+    ).then(function (response) {
+      if (!response.ok) {
+        return response.json();
+      }
 
+      response.json([0]).then(function (data) {
+        console.log(data[randomEx1]);
+        console.log(data[randomEx2]);
+      });
+    });
+  }
+}
 
 // -------------------------------------------------------------------
-
+mainWeatherCard = $("#mainWeatherCard");
+pageBody = $("#page-content");
 function generateForecastCards() {
   clearOld();
-  console.log(pageBody, mainCard);
+
   let cityName = $("#user-city").val();
   const weatherUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&units=imperial&appid=acbf659b6dad995f4221a78b638e6923`;
   fetch(weatherUrl).then(function (response) {
@@ -77,6 +78,7 @@ function generateForecastCards() {
       });
 
       // Generate 5 Day Forecast Cards
+
       for (let i = 0; i < fiveDayData.length; i++) {
         let temp = `Temp: ${fiveDayData[i].main.temp.toFixed(2)}°F`;
         //
@@ -93,7 +95,7 @@ function generateForecastCards() {
           let mainTitle = $("<h1>");
           mainTitle.addClass("mainCardTitle");
           mainTitle.text(`Weather for ${date} in ${cityName}`);
-          mainCard.append(mainTitle);
+          mainWeatherCard.append(mainTitle);
           //
           let mainIcon = $("<img>");
           mainIcon.addClass("mx-auto justify-self-center");
@@ -101,19 +103,19 @@ function generateForecastCards() {
             "src",
             `https://openweathermap.org/img/wn/${weatherIcon}@2x.png`
           );
-          mainCard.append(mainIcon);
+          mainWeatherCard.append(mainIcon);
           //
           let mainTemp = $("<p>");
           mainTemp.text(`${temp}`);
-          mainCard.append(mainTemp);
+          mainWeatherCard.append(mainTemp);
           //
           let mainWind = $("<p>");
           mainWind.text(`${wind}`);
-          mainCard.append(mainWind);
+          mainWeatherCard.append(mainWind);
           //
           let mainHumidity = $("<p>");
           mainHumidity.text(`${humidity}`);
-          mainCard.append(mainHumidity);
+          mainWeatherCard.append(mainHumidity);
         } else {
           let card = $("<div>");
           card.addClass("container bg-blue-600 w-80 h-60 text-2xl dayCastCard");
@@ -161,7 +163,7 @@ function clearOld() {
   document.querySelectorAll("[class*=dayCastCard]").forEach((element) => {
     element.style.display = "none";
   });
-  mainCard.text("");
+  mainWeatherCard.text("");
 }
 
 window.addEventListener("search", generateForecastCards);
