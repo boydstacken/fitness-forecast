@@ -38,8 +38,11 @@ for (i = 0; i < 3; i++) {
 // Generating Weather Cards
 let pageBody = $("#page-content");
 let mainCard = $("#mainWeatherCard");
+let userSearch = $("#user-city");
 function generateForecastCards() {
-  let cityName = "Madison";
+  clearOld();
+  console.log(pageBody, mainCard);
+  let cityName = $("#user-city").val();
   const weatherUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&units=imperial&appid=acbf659b6dad995f4221a78b638e6923`;
   fetch(weatherUrl).then(function (response) {
     if (!response.ok) {
@@ -79,6 +82,7 @@ function generateForecastCards() {
           mainCard.append(mainTitle);
           //
           let mainIcon = $("<img>");
+          mainIcon.addClass("mx-auto justify-self-center");
           mainIcon.attr(
             "src",
             `https://openweathermap.org/img/wn/${weatherIcon}@2x.png`
@@ -98,7 +102,7 @@ function generateForecastCards() {
           mainCard.append(mainHumidity);
         } else {
           let card = $("<div>");
-          card.addClass("container bg-blue-600 w-80 h-60 text-2xl");
+          card.addClass("container bg-blue-600 w-80 h-60 text-2xl dayCastCard");
           pageBody.append(card);
           //
           let cardBody = $("<div>");
@@ -111,7 +115,7 @@ function generateForecastCards() {
           cardBody.append(cardTitle);
           //
           let cardIcon = $("<img>");
-          cardIcon.addClass("img-fluid");
+          cardIcon.addClass("mx-auto justify-self-center");
           cardIcon.attr(
             "src",
             `https://openweathermap.org/img/wn/${weatherIcon}@2x.png`
@@ -139,4 +143,11 @@ function generateForecastCards() {
   });
 }
 
-window.addEventListener("load", generateForecastCards);
+function clearOld() {
+  document.querySelectorAll("[class*=dayCastCard]").forEach((element) => {
+    element.style.display = "none";
+  });
+  mainCard.text("");
+}
+
+window.addEventListener("search", generateForecastCards);
