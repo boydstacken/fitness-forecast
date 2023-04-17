@@ -20,25 +20,39 @@ function generateNumber() {
   }
 }
 
-for (i = 0; i < 3; i++) {
-  fetch(`https://api.api-ninjas.com/v1/exercises?muscle=${muscle[exeDay][i]}`, {
-    method: "GET",
-    headers: { "X-Api-Key": "JTo+3b4INS07H1+MuR5ygw==xgXVzkHdaEOHWO1Y" },
-    contentType: "application/json",
-  }).then(function (response) {
-    if (!response.ok) {
-      return response.json();
-    }
-    response.json([0]).then(function (data) {
-      console.log(data[randomEx1]);
-      console.log(data[randomEx2]);
-    });
-  });
+for (i=0; i<=4; i++){
+  if (exeDay > 4) {
+    clearInterval(exeDay)
+  } else {
+  generateWorkout()
+  exeDay++
 }
-// Generating Weather Cards
-let pageBody = $("#page-content");
-let mainCard = $("#mainWeatherCard");
-let userSearch = $("#user-city");
+}
+
+
+
+function generateWorkout(){
+for (i=0; i<3; i++) {
+fetch(`https://api.api-ninjas.com/v1/exercises?muscle=${muscle[exeDay][i]}`, {
+  method: "GET",
+  headers: { "X-Api-Key": "JTo+3b4INS07H1+MuR5ygw==xgXVzkHdaEOHWO1Y" },
+  contentType: "application/json",
+}).then(function (response) {
+  if (!response.ok) {
+    return response.json();
+  }
+
+  response.json([0]).then(function (data) {
+    console.log(data[randomEx1])
+     console.log(data[randomEx2])}
+     
+  );
+})}
+};
+
+
+// -------------------------------------------------------------------
+
 function generateForecastCards() {
   clearOld();
   console.log(pageBody, mainCard);
