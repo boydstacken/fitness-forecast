@@ -58,9 +58,7 @@ function generateWorkout() {
   );
 })}
 };
-let pageBody = $("#page-content");
-let mainCard = $("#mainWeatherCard");
-let userSearch = $("#user-city");
+
 
 // -------------------------------------------------------------------
 mainWeatherCard = $("#mainWeatherCard");
