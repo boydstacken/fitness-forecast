@@ -7,11 +7,11 @@ var muscle = [
 ];
 
 var cardio = [
- ["Dance Fitness", "Spin Class", "Indoor Rock Climbing"],
- ["Swimming", "Kayaking", "Canoeing", "Paddle Boarding"],
- ["Biking", "Yoga", "Roller Skating", "Yard Work"],
- ["Running", "Jogging", "Hiking", "Jump Rope"],
- ["Ice Skating", "Skiing", "Snowboarding", "Snow Shoeing", "Cross Country Skiing"] 
+  ["Dance Fitness", "Spin Class", "Indoor Rock Climbing"],
+  ["Swimming", "Kayaking", "Canoeing", "Paddle Boarding"],
+  ["Biking", "Yoga", "Roller Skating", "Yard Work"],
+  ["Running", "Jogging", "Hiking", "Jump Rope"],
+  ["Ice Skating", "Skiing", "Snowboarding", "Snow Shoeing", "Cross Country Skiing"]
 ]
 
 var randomEx1 = Math.floor(Math.random() * 10);
@@ -28,17 +28,23 @@ function generateNumber() {
   }
 }
 
-for (i = 0; i <= 4; i++) {
-  if (exeDay > 4) {
-    clearInterval(exeDay);
-  } else {
-    generateWorkout();
-    exeDay++;
-  }
-}
 
 function generateWorkout() {
-  for (i = 0; i < 3; i++) {
+  if (exeDay > 4) {
+    exeDay=0;
+  randomExercises()}
+    else
+  randomExercises();
+  exeDay++
+  console.log(exeDay)
+
+ 
+  } 
+
+
+
+function randomExercises() {
+  for (i = 0; i <= 2; i++) {
     fetch(
       `https://api.api-ninjas.com/v1/exercises?muscle=${muscle[exeDay][i]}`,
       {
@@ -51,12 +57,17 @@ function generateWorkout() {
         return response.json();
       }
 
-  response.json([0]).then(function (data) {
-    console.log(data[randomEx1])
-     console.log(data[randomEx2])}
-     
-  );
-})}
+      response.json([0]).then(function (data) {
+        let mainWorkout = $("<p>");
+        mainWorkout.text((data[randomEx1].name) + (data[randomEx2].name))
+        mainWeatherCard.append(mainWorkout)
+  
+  
+      }
+
+      );
+    })
+  }
 };
 
 
@@ -125,6 +136,8 @@ function generateForecastCards() {
           let mainHumidity = $("<p>");
           mainHumidity.text(`${humidity}`);
           mainWeatherCard.append(mainHumidity);
+
+
         } else {
           let card = $("<div>");
           card.addClass("container bg-blue-600 w-80 h-60 text-2xl dayCastCard");
@@ -175,4 +188,8 @@ function clearOld() {
   mainWeatherCard.text("");
 }
 
-window.addEventListener("search", generateForecastCards);
+window.addEventListener("search", () => {
+  generateForecastCards();
+  generateWorkout();
+})
+
