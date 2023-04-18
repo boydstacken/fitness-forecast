@@ -6,6 +6,14 @@ var muscle = [
   ["glutes", "Hamstrings", "calves"],
 ];
 
+var cardio = [
+ ["Dance Fitness", "Spin Class", "Indoor Rock Climbing"],
+ ["Swimming", "Kayaking", "Canoeing", "Paddle Boarding"],
+ ["Biking", "Yoga", "Roller Skating", "Yard Work"],
+ ["Running", "Jogging", "Hiking", "Jump Rope"],
+ ["Ice Skating", "Skiing", "Snowboarding", "Snow Shoeing", "Cross Country Skiing"] 
+]
+
 var randomEx1 = Math.floor(Math.random() * 10);
 var randomEx2 = 0;
 
@@ -43,13 +51,14 @@ function generateWorkout() {
         return response.json();
       }
 
-      response.json([0]).then(function (data) {
-        console.log(data[randomEx1]);
-        console.log(data[randomEx2]);
-      });
-    });
-  }
-}
+  response.json([0]).then(function (data) {
+    console.log(data[randomEx1])
+     console.log(data[randomEx2])}
+     
+  );
+})}
+};
+
 
 // -------------------------------------------------------------------
 mainWeatherCard = $("#mainWeatherCard");
