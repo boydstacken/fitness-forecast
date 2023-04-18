@@ -6,6 +6,14 @@ var muscle = [
   ["glutes", "Hamstrings", "calves"],
 ];
 
+var cardio = [
+ ["Dance Fitness", "Spin Class", "Indoor Rock Climbing"],
+ ["Swimming", "Kayaking", "Canoeing", "Paddle Boarding"],
+ ["Biking", "Yoga", "Roller Skating", "Yard Work"],
+ ["Running", "Jogging", "Hiking", "Jump Rope"],
+ ["Ice Skating", "Skiing", "Snowboarding", "Snow Shoeing", "Cross Country Skiing"] 
+]
+
 var randomEx1 = Math.floor(Math.random() * 10);
 var randomEx2 = 0;
 
@@ -49,7 +57,9 @@ fetch(`https://api.api-ninjas.com/v1/exercises?muscle=${muscle[exeDay][i]}`, {
   );
 })}
 };
-
+let pageBody = $("#page-content");
+let mainCard = $("#mainWeatherCard");
+let userSearch = $("#user-city");
 
 // -------------------------------------------------------------------
 
