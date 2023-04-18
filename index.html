@@ -55,12 +55,23 @@
       src="./assets/Running Outside Banner.png"
     />
     <main class="container mx-auto px-40">
-      <section class="Todays-Weather pt-10 pb-10">
-        <div
-          class="container justify-center bg-blue-600 w-50 h-72 text-white text-center place-items-center text-2xl align-items: center;"
-          id="mainWeatherCard"
-        ></div>
-      </section>
+      <div class="flex mx-auto gap-4">
+        <div class="grid grid-cols-2 grid-flow-row gap-4 flex-wrap mx-auto justify-content-center text-white text-center content-center place-items-center pt-10 pb-20 mn-h-screen">
+          <section class="Todays-Weather pt-10 pb-10">
+            <div class="bg-blue-600 w-80 h-60 text-2xl"
+              id="mainWeatherCard">
+              <h2>Today's Weather</h2>
+            </div>
+          </section>
+          <section class="Todays-Workout pt-10 pb-10">
+            <div class="bg-blue-600 w-80 h-60 text-2xl"
+              id="mainWorkoutCard">
+              <h2>Today's Workouts</h2>
+            </div>
+          </section>
+        </div>
+      </div>
+      
       <div class="Search-Bar-icon">
         <div class="relative mb-4 flex w-full flex-wrap items-stretch">
           <input
@@ -92,7 +103,7 @@
         </div>
       </div>
       <div class="flex mx-auto gap-4">
-        <div class = "grid grid-cols-1 grid-flow-cols flex-wrap gap-4 flex-wrap text-white text-center content-center place-items-left pt-10 pb-20 mn-h-screen">
+        <div class = "grid grid-cols-1 grid-flow-cols flex-wrap gap-4 flex-wrap mx-auto justify-content-center text-white text-center content-center place-items-left pt-10 pb-20 mn-h-screen">
           <section class = "Previous Workouts">
             <div class="container bg-gray-500 w-80 h-60 text-2xl">
               <h2>Previous Workouts</h2>
@@ -104,7 +115,7 @@
         </div>
         <div
         id="page-content"
-        class="grid grid-cols-2 grid-flow-row gap-4 flex-wrap text-white text-center content-center place-items-center pt-10 pb-20 mn-h-screen"
+        class="grid grid-cols-2 grid-flow-row gap-4 flex-wrap mx-auto justify-content-center text-white text-center content-center place-items-center pt-10 pb-20 mn-h-screen"
       >
         </div>
       </div>
