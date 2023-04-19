@@ -25,6 +25,8 @@ var randomEx2 = 0;
 
 var exeDay = 0;
 
+var mainWeatherCard = $("#mainWorkoutCard");
+
 function generateNumber() {
   randomEx2 = Math.floor(Math.random() * 10);
   if (randomEx1 !== randomEx2) {
@@ -50,9 +52,9 @@ function generateWorkout() {
 
 
 function randomExercises() {
-  for (i = 0; i <= 2; i++) {
+  
     fetch(
-      `https://api.api-ninjas.com/v1/exercises?muscle=${muscle[exeDay][i]}`,
+      `https://api.api-ninjas.com/v1/exercises?muscle=${muscle[exeDay]}`,
       {
         method: "GET",
         headers: { "X-Api-Key": "JTo+3b4INS07H1+MuR5ygw==xgXVzkHdaEOHWO1Y" },
@@ -63,18 +65,27 @@ function randomExercises() {
         return response.json();
       }
 
+   
+
       response.json([0]).then(function (data) {
-        let mainWorkout = $("<p>");
-        mainWorkout.text((data[randomEx1].name) + (data[randomEx2].name))
-        mainWeatherCard.append(mainWorkout)
-  
-  
+        console.log(data[randomEx1].name)
+        // for (i = 0; i <= 2; i++) {
+        // let mainWorkout1 = $("<p>");
+        // let mainWorkout2 = $("<p>");
+        // mainWorkout1.text(data[randomEx1].name)
+        // mainWorkout2.text(data[randomEx2].name)
+        // console.log(data[randomEx1].name)
+        // console.log(data[randomEx2].name)
+        // mainWorkoutCard.append(mainWorkout1)
+        // mainWorkoutCard.append(mainWorkout2)
+        // console.log(mainWorkout.text)
+      // } 
       }
 
       );
     })
   }
-};
+;
 
 
 // -------------------------------------------------------------------
