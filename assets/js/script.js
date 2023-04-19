@@ -20,81 +20,57 @@ var cardio = [
   ],
 ];
 
-var randomEx1 = Math.floor(Math.random() * 10);
-var randomEx2 = 0;
+// var randomEx1 = Math.floor(Math.random() * 10);
+// var randomEx2 = 0;
 
-var exeDay = 0;
+// var exeDay = 0;
 
-var mainWeatherCard = $("#mainWorkoutCard");
+// function generateNumber() {
+//   randomEx2 = Math.floor(Math.random() * 10);
+//   if (randomEx1 !== randomEx2) {
+//     return randomEx2;
+//   } else {
+//     generateNumber();
+//   }
+// }
 
-function generateNumber() {
-  randomEx2 = Math.floor(Math.random() * 10);
-  if (randomEx1 !== randomEx2) {
-    return randomEx2;
-  } else {
-    generateNumber();
-  }
-}
+// for (i = 0; i <= 4; i++) {
+//   if (exeDay > 4) {
+//     clearInterval(exeDay);
+//   } else {
+//     generateWorkout();
+//     exeDay++;
+//   }
+// }
 
+// function generateWorkout() {
+//   for (i = 0; i < 3; i++) {
+//     fetch(
+//       `https://api.api-ninjas.com/v1/exercises?muscle=${muscle[exeDay][i]}`,
+//       {
+//         method: "GET",
+//         headers: { "X-Api-Key": "JTo+3b4INS07H1+MuR5ygw==xgXVzkHdaEOHWO1Y" },
+//         contentType: "application/json",
+//       }
+//     ).then(function (response) {
+//       if (!response.ok) {
+//         return response.json();
+//       }
 
-function generateWorkout() {
-  if (exeDay > 4) {
-    exeDay=0;
-  randomExercises()}
-    else
-  randomExercises();
-  exeDay++
-  console.log(exeDay)
-
- 
-  } 
-
-
-
-function randomExercises() {
-  
-    fetch(
-      `https://api.api-ninjas.com/v1/exercises?muscle=${muscle[exeDay]}`,
-      {
-        method: "GET",
-        headers: { "X-Api-Key": "JTo+3b4INS07H1+MuR5ygw==xgXVzkHdaEOHWO1Y" },
-        contentType: "application/json",
-      }
-    ).then(function (response) {
-      if (!response.ok) {
-        return response.json();
-      }
-
-   
-
-      response.json([0]).then(function (data) {
-        console.log(data[randomEx1].name)
-        // for (i = 0; i <= 2; i++) {
-        // let mainWorkout1 = $("<p>");
-        // let mainWorkout2 = $("<p>");
-        // mainWorkout1.text(data[randomEx1].name)
-        // mainWorkout2.text(data[randomEx2].name)
-        // console.log(data[randomEx1].name)
-        // console.log(data[randomEx2].name)
-        // mainWorkoutCard.append(mainWorkout1)
-        // mainWorkoutCard.append(mainWorkout2)
-        // console.log(mainWorkout.text)
-      // } 
-      }
-
-      );
-    })
-  }
-;
-
+//       response.json([0]).then(function (data) {
+//         console.log(data[randomEx1]);
+//         console.log(data[randomEx2]);
+//       });
+//     });
+//   }
+// }
 
 // -------------------------------------------------------------------
-mainWeatherCard = $("#mainWeatherCard");
-pageBody = $("#page-content");
-function generateForecastCards() {
-  clearOld();
-
-  let cityName = $("#user-city").val();
+let mainWeatherCard = $("#mainWeatherCard");
+let pageBody = $("#page-content");
+let cityName = "";
+function generateForecastCards(cityName) {
+  clearOldWeather();
   const weatherUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&units=imperial&appid=acbf659b6dad995f4221a78b638e6923`;
   fetch(weatherUrl).then(function (response) {
     if (!response.ok) {
@@ -128,25 +104,17 @@ function generateForecastCards() {
         //
         let weatherCondition = fiveDayData[i].weather[0].main;
         let tempCompare = fiveDayData[i].main.temp.toFixed(2);
-        console.log(weatherCondition);
-        console.log(tempCompare);
-        if (weatherCondition === "Rain" || tempCompare <= 31) {
-          cardioWorkout =
-            cardio[0][Math.floor(Math.random() * cardio[0].length)];
-        } else if (weatherCondition === "Snow") {
-          cardioWorkout =
-            cardio[4][Math.floor(Math.random() * cardio[4].length)];
-        } else if (tempCompare <= 50) {
-          cardioWorkout =
-            cardio[3][Math.floor(Math.random() * cardio[3].length)];
-        } else if (tempCompare <= 84) {
-          cardioWorkout =
-            cardio[2][Math.floor(Math.random() * cardio[2].length)];
-        } else if (tempCompare > 84) {
-          cardioWorkout =
-            cardio[1][Math.floor(Math.random() * cardio[1].length)];
-        }
+        let tempLookUp = 0;
+        if (weatherCondition === "Rain" || tempCompare <= 31) tempLookUp = 0;
+        else if (weatherCondition === "Snow") tempLookUp = 4;
+        else if (tempCompare <= 50) tempLookUp = 3;
+        else if (tempCompare <= 84) tempLookUp = 2;
+        else if (tempCompare > 84) tempLookUp = 1;
 
+        cardioWorkout =
+          cardio[tempLookUp][
+            Math.floor(Math.random() * cardio[tempLookUp].length)
+          ];
         if (i === 0) {
           //
           let mainTitle = $("<h1>");
@@ -211,19 +179,23 @@ function generateForecastCards() {
           //
         }
       }
+      localStorage.setItem("City", cityName);
     });
   });
 }
 
-function clearOld() {
+function clearOldWeather() {
   document.querySelectorAll("[class*=dayCastCard]").forEach((element) => {
     element.style.display = "none";
   });
   mainWeatherCard.text("");
 }
-
+window.addEventListener("load", () => {
+  cityName = localStorage.getItem("City");
+  if (cityName == null) return;
+  generateForecastCards(cityName);
+});
 window.addEventListener("search", () => {
-  generateForecastCards();
-  generateWorkout();
-})
-
+  cityName = $("#user-city").val();
+  generateForecastCards(cityName);
+});
