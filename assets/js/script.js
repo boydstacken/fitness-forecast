@@ -53,36 +53,29 @@ function generateNumber() {
 // }
 
 
-
 function futureWorkouts(){
+  for (i = 1; i <= 4; i++) {
+    let futureWorkout = $("<p>");
+    futureWorkout.text(groupNames[i] + " : " + muscleGroups[i]);
+    futureWorkoutCard.append(futureWorkout);
+  }
+  }
 
-
-
-
-for (i = 1; i <= 4; i++) {
-  let futureWorkout = $("<p>");
-  futureWorkout.text(groupNames[i]);
-  futureWorkoutCard.append(futureWorkout);
-
-  futureWorkout.text(muscleGroups[i]);
-  futureWorkoutCard.append(futureWorkout);
-
-}
-}
-
-
-  for (i = 0; i <= 2; i++) {
-    if (muscleLoop > 2) {
-      clearInterval(exeDay);
-    } else
-      generateWorkout();
-    muscleLoop++;
-
+function workoutText(){
+    // for (i=0; i<=2; i++)
+    generateWorkout()
+    muscleLoop++
+    generateWorkout()
+    muscleLoop++
+    generateWorkout()
   }
 
 
 
   function generateWorkout() {
+    console.log("here also")
+    console.log(muscleLoop)
+  
     generateNumber()
     futureWorkouts()
 
@@ -104,13 +97,15 @@ for (i = 1; i <= 4; i++) {
         let mainWorkout1 = $("<p>");
         let mainWorkout2 = $("<p>");
 
-        for (i = 0; i <= 1; i++) {
+       
           mainWorkout1.text(Ex1);
           mainWorkoutCard.append(mainWorkout1);
 
           mainWorkout2.text(Ex2);
           mainWorkoutCard.append(mainWorkout2);
-        }
+  
+        // console.log(Ex1)
+        // console.log(Ex2)
 
       });
     });
@@ -249,6 +244,7 @@ for (i = 1; i <= 4; i++) {
     cityName = localStorage.getItem("City");
     if (cityName == null) return;
     generateForecastCards(cityName);
+    workoutText()
   });
   window.addEventListener("search", () => {
     cityName = $("#user-city").val();
