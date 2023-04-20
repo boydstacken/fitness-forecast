@@ -13,27 +13,32 @@
       <nav
         class="sticky tp-0 flex items-center justify-center flex-wrap bg-gray-200 p-6"
       >
-      <div class="mb-2 sm:mb-0 flex flex-row">
-        <img class="h-10 w-10 self-center mx-auto" src="./assets/FF Icon.png" alt="fitness forecast icon">
-      </div>
+        <div class="mb-2 sm:mb-0 flex flex-row">
+          <img
+            class="h-10 w-10 self-center mx-auto"
+            src="./assets/FF Icon.png"
+            alt="fitness forecast icon"
+          />
+        </div>
         <h1 class="text-left text-3xl font-bold text pl-10 pr-10">
           Fitness Forecast
         </h1>
         <ul cass="flex border-b">
           <li
             class="bg-blue-600 inline-block py-2 px-4 text-white hover:bg-blue-400 font-semibold"
-            href="#"
           >
-            Home
+            <a href="#top-of-page">To Top</a>
           </li>
           <li
             class="bg-blue-600 inline-block py-2 px-4 text-white hover:bg-blue-400 font-semibold"
             href="#"
           >
-            Weather
+            <a href="#page-content">Forecast</a>
           </li>
           <li
-           class="bg-blue-600 inline-block py-2 px-4 text-white hover:bg-blue-400 font-semibold"><a href="#mainWorkoutCard"></a>Workouts
+            class="bg-blue-600 inline-block py-2 px-4 text-white hover:bg-blue-400 font-semibold"
+          >
+            <a href="#mainWorkoutCard">Workouts</a>
           </li>
         </ul>
       </nav>
@@ -44,6 +49,7 @@
       h-full
       min-w-full
       src="./assets/Running Outside Banner.png"
+      id="top-of-page"
     />
     <main class="container mx-auto px-40">
       <div class="flex mx-auto gap-4 justify-center">
@@ -97,9 +103,12 @@
         class="grid md:grid-cols-2 gap-4 flex-wrap mx-auto justify-center text-white text-center place-items-center pt-10 pb-20"
       >
         <div class="flex gap-4 justify-center mx-auto items-center h-full">
-            <section class="container bg-gray-500 min-w-fit p-5 min-h-full text-2xl float-right" id="futureWorkoutCard">
-              <h2>Future Muscle Groups</h2>
-            </section>
+          <section
+            class="container bg-gray-500 min-w-fit p-5 min-h-full text-2xl float-right"
+            id="futureWorkoutCard"
+          >
+            <h2>Future Muscle Groups</h2>
+          </section>
         </div>
         <div
           class="grid md:grid-cols-2 grid-flow-cols gap-4 flex-wrap mx-auto text-white text-center place-items-center pt-10 pb-20"
