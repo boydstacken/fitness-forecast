@@ -39,15 +39,6 @@ function generateNumber() {
   }
 }
 
-// for (i = 0; i <= 4; i++) {
-//   if (exeDay > 4) {
-//     clearInterval(exeDay);
-//   } else {
-//     generateWorkout();
-//     exeDay++;
-//   }
-// }
-
 function futureWorkouts() {
   for (i = 1; i <= 4; i++) {
     let futureWorkout = $("<p>");
@@ -58,7 +49,6 @@ function futureWorkouts() {
 }
 
 function workoutText() {
-  // for (i=0; i<=2; i++)
   generateWorkout();
   muscleLoop++;
   generateWorkout();
@@ -67,9 +57,6 @@ function workoutText() {
 }
 
 function generateWorkout() {
-  console.log("here also");
-  console.log(muscleLoop);
-
   generateNumber();
 
   fetch(
@@ -95,9 +82,6 @@ function generateWorkout() {
 
       mainWorkout2.text(Ex2);
       mainWorkoutCard.append(mainWorkout2);
-
-      // console.log(Ex1)
-      // console.log(Ex2)
     });
   });
 }
@@ -114,8 +98,8 @@ function generateForecastCards(cityName) {
       return response.json();
     }
     response.json().then(function (data) {
+      // Grabbing data based on time of request
       let fiveDayData = [];
-      console.log(fiveDayData);
       data.list.forEach((element) => {
         let queryTime = data.list[0].dt_txt;
         let currentHour = new Date(queryTime).getHours();
@@ -139,6 +123,7 @@ function generateForecastCards(cityName) {
         //
         let cardioWorkout = "";
         //
+        // Checking to see which cardio group should be randomly chosen from based on temp
         let weatherCondition = fiveDayData[i].weather[0].main;
         let tempCompare = fiveDayData[i].main.temp.toFixed(2);
         let tempLookUp = 0;
@@ -153,7 +138,7 @@ function generateForecastCards(cityName) {
             Math.floor(Math.random() * cardio[tempLookUp].length)
           ];
         if (i === 0) {
-          //
+          // Setting up main weather card
           let mainTitle = $("<h1>");
           mainTitle.addClass("mainCardTitle");
           mainTitle.text(`Weather for ${date} in ${cityName}`);
@@ -179,6 +164,7 @@ function generateForecastCards(cityName) {
           mainCardio.text("Cardio: " + cardioWorkout);
           mainWeatherCard.append(mainCardio);
         } else {
+          // Setting up future forecast cards and appending to grid
           let card = $("<div>");
           card.addClass("container bg-blue-600 w-80 h-60 text-2xl dayCastCard");
           pageBody.append(card);
@@ -221,6 +207,7 @@ function generateForecastCards(cityName) {
   });
 }
 
+// Clears old content if a new city is entered
 function clearOldWeather() {
   document.querySelectorAll("[class*=dayCastCard]").forEach((element) => {
     element.style.display = "none";
@@ -228,6 +215,7 @@ function clearOldWeather() {
   mainWeatherCard.text("");
 }
 
+// On load will access local storage and grab the last city name entered
 window.addEventListener("load", () => {
   cityName = localStorage.getItem("City");
   if (cityName == null) return;
@@ -235,6 +223,8 @@ window.addEventListener("load", () => {
   workoutText();
   futureWorkouts();
 });
+
+// Grabs user input from the search bar and generates new weather cards
 window.addEventListener("search", () => {
   cityName = $("#user-city").val();
   generateForecastCards(cityName);

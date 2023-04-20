@@ -66,6 +66,6 @@ Jayson Baker
 
 Boyd Stacken
 
-## link to live page:
+## Link to live page:
 
 https://boydstacken.github.io/fitness-forecast/
