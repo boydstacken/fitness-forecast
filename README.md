@@ -58,9 +58,12 @@ Jayson Baker - Bakej07@gmail.com
 
 Boyd Stacken - boydstacken@icloud.com
 
-Authors & Acknowledgement
+## Authors & Acknowledgement
+
 Abigail Livick
+
 Jayson Baker
+
 Boyd Stacken
 
 ## link to live page:
