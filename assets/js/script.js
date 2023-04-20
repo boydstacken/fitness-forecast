@@ -77,7 +77,7 @@ function workoutText(){
     console.log(muscleLoop)
   
     generateNumber()
-    futureWorkouts()
+
 
     fetch(`https://api.api-ninjas.com/v1/exercises?muscle=${muscleGroups[exeDay][muscleLoop]}`,
       {
@@ -240,11 +240,14 @@ function workoutText(){
     });
     mainWeatherCard.text("");
   }
+
+
   window.addEventListener("load", () => {
     cityName = localStorage.getItem("City");
     if (cityName == null) return;
     generateForecastCards(cityName);
-    workoutText()
+    workoutText();
+    futureWorkouts()
   });
   window.addEventListener("search", () => {
     cityName = $("#user-city").val();
