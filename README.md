@@ -48,6 +48,11 @@ THEN I am presented with the weather of the current day in my last entered city
 
 Enter your city name in the search bar to have the application populate with the current weather in your area. Use the information given by the app to plan out a workout schedule for the next five days. Maybe even plan on using some of the weather dependent suggestions from the app!
 
+## Screenshots
+
+![Screenshot 1](/assets/Screenshot%202023-04-23%20100012.png)
+![Screenshot 2](/assets/Screenshot%202023-04-23%20095244.png)
+
 ## Support
 
 If you have issues with the application, please don't hesitate to reach our team at the dedicated contact information below.
